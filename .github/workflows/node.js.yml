@@ -11,9 +11,9 @@ on:
 
 jobs:
   build:
-
+    
     runs-on: ubuntu-latest
-
+    
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -26,7 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: 'crossfit-wod-api/package-lock.json'
+        cache-dependency-path: '**/package-lock.json'
     - run: npm ci
+      working-directory: 'crossfit-wod-api'
     - run: npm run build --if-present
     - run: npm test
